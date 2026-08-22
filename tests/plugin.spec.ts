@@ -66,7 +66,7 @@ describe('dsh-plugin-chart', () => {
     expect(result).toMatchObject({
       isError: false,
       value: { type: 'pie', url: 'https://example.com/generated.png' },
-      content: [{ type: 'text', text: '![AntV pie chart](https://example.com/generated.png)' }],
+      content: [{ type: 'text', text: '![AntV pie chart](<https://example.com/generated.png>)' }],
     })
 
     await fiber.dispose()

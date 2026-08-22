@@ -43,7 +43,20 @@ export async function requestAntvChart(
     throw new Error(`AntV chart request failed: ${errorMessage(error)}`, { cause: error })
   }
 
-  const text = await readLimitedText(response, config.maxResponseBytes)
+  let text: string
+  try {
+    text = await readLimitedText(response, config.maxResponseBytes)
+  } catch (error: unknown) {
+    if (options.signal?.aborted === true) {
+      throw new Error('AntV chart request was canceled', { cause: error })
+    }
+    if (timeoutSignal.aborted) {
+      throw new Error(`AntV chart request timed out after ${config.requestTimeoutMs} ms`, {
+        cause: error,
+      })
+    }
+    throw error
+  }
   if (!response.ok) {
     throw new Error(`AntV chart API returned HTTP ${response.status}: ${responseSummary(text)}`)
   }
@@ -72,6 +85,11 @@ export async function requestAntvChart(
 async function readLimitedText(response: Response, maxBytes: number): Promise<string> {
   const declaredLength = response.headers.get('content-length')
   if (declaredLength !== null && Number(declaredLength) > maxBytes) {
+    try {
+      await response.body?.cancel('response size limit exceeded')
+    } catch {
+      // Preserve the size-limit error when best-effort stream cleanup fails.
+    }
     throw new Error(`AntV chart API response exceeds ${maxBytes} bytes`)
   }
   if (response.body === null) return ''
@@ -86,7 +104,11 @@ async function readLimitedText(response: Response, maxBytes: number): Promise<st
     if (part.done) break
     bytes += part.value.byteLength
     if (bytes > maxBytes) {
-      await reader.cancel('response size limit exceeded')
+      try {
+        await reader.cancel('response size limit exceeded')
+      } catch {
+        // Preserve the size-limit error when best-effort stream cleanup fails.
+      }
       throw new Error(`AntV chart API response exceeds ${maxBytes} bytes`)
     }
     text += decoder.decode(part.value, { stream: true })

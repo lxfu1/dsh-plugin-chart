@@ -8,7 +8,7 @@ import {
 const NAME = 'chart-visualization'
 const PROVIDER = 'dsh-plugin-chart'
 const DESCRIPTION =
-  'Create chart images from structured data with AntV. Use for data visualization requests such as line, bar, pie, scatter, radar, Sankey, network, flow, mind-map, organization, and spreadsheet charts（数据可视化、图表）.'
+  'Create chart images from structured data with AntV. Use for data visualization requests such as line, bar, pie, scatter, radar, Sankey, network, flow, mind-map, organization, and spreadsheet charts (数据可视化、图表).'
 const INVOCATION = { modelInvocable: true, userInvocable: true } as const
 
 /**
@@ -154,7 +154,7 @@ const DEFINITION: SkillDefinition = {
   content: SKILL_CONTENT,
 }
 
-/** Immutable bundled provider; project and user skills may override it by rank. */
+/** Static bundled provider; project and user skills may override it by rank. */
 export const skillProvider: SkillProvider = {
   name: PROVIDER,
   list: () => Promise.resolve([CANDIDATE]),

@@ -2,111 +2,103 @@
 
 English | [简体中文](README.zh-CN.md)
 
-An unofficial community plugin for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) that embeds an adaptation of AntV's [`chart-visualization`](https://github.com/antvis/chart-visualization-skills/tree/master/skills/chart-visualization) skill and adds a native `antv_chart` tool.
+An unofficial community plugin for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) that creates AntV chart images directly from natural-language requests.
 
-The skill helps the model select and structure 24 chart types. The tool calls the AntV-compatible GPT-Vis endpoint with cancellation, timeout, response-size limits, response validation, and Markdown image rendering. Users do not need to copy `SKILL.md` files or ask the model to run `curl`.
+Provide the data and what you want to communicate. The plugin selects a suitable chart and displays the result in the conversation. Supported formats include line, bar, pie, radar, Sankey, organization, network, and flow charts.
 
 > [!IMPORTANT]
-> This project is not affiliated with or endorsed by DeepSeek or AntV. DeepSeek Harness is currently a developer preview and may introduce breaking plugin APIs.
-
-## How it works
-
-```mermaid
-flowchart LR
-  A[Visualization request] --> B[chart-visualization skill]
-  B --> C[Structured AntV spec]
-  C --> D[antv_chart tool]
-  D --> E[AntV-compatible endpoint]
-  E --> F[Markdown chart image]
-```
-
-The installable bundle contributes two registrations:
-
-- `chart-visualization`: model- and user-invocable skill provider backed by content embedded in the plugin module.
-- `antv_chart`: model-facing tool that posts a validated chart specification and renders the returned image URL.
+> This project is not affiliated with or endorsed by DeepSeek or AntV. DeepSeek Harness is currently a developer preview and may introduce breaking changes.
 
 ## Requirements
 
 - Node.js `^22.19.0` or `>=24.0.0`
-- pnpm on `PATH` (required by `dsh plugin`)
-- DeepSeek Harness `0.1.0-rc.7` through the current `0.1.x` developer preview
+- pnpm on `PATH`
+- DeepSeek Harness `0.1.x`
 
 ## Install
 
-From npm after the package is published:
+Install directly from GitHub into the `web` profile:
 
 ```sh
-dsh plugin --profile web add dsh-plugin-chart
+npx @deepseek-ai/dsh plugin --profile web add github:lxfu1/dsh-plugin-chart
 ```
 
-From this checkout during development:
+Git-hosted plugins build from source during installation. On pnpm 10 or later, the first command may ask you to allow the `dsh-plugin-chart` build in the profile's `pnpm-workspace.yaml`; follow the path printed by dsh, add the exact `allowBuilds` key reported by pnpm, and rerun the same command. Only grant build permission to source you trust.
+
+Start the Web app:
 
 ```sh
-git clone <your-repository-url> dsh-plugin-chart
-cd dsh-plugin-chart
-pnpm install
-dsh plugin --profile web add .
+npx @deepseek-ai/dsh web
 ```
 
-DeepSeek Harness anchors `add .` to the invoking checkout and automatically adds this package's `cordis.patch.yml` to the selected profile's bundle stack.
+## Examples
 
-Current developer-preview releases may print pnpm warnings that the `@deepseek-ai/cordis`, `@deepseek-ai/dsh-skill`, and `@deepseek-ai/dsh-tools` peers are missing from the profile itself. The Harness launcher supplies those host packages through its maintained `$DSH_HOME/profiles/node_modules` fallback; do not add duplicate copies solely to silence the warning. Confirm installation with `dsh --profile web --dump-config` and look for the enabled `dsh-chart` row.
-
-Start the profile:
-
-```sh
-dsh web
-```
-
-Remove the plugin with:
-
-```sh
-dsh plugin --profile web remove dsh-plugin-chart
-```
-
-## Use
-
-Ask naturally:
+### Line chart
 
 ```text
-Create a line chart for monthly active users: Jan 120, Feb 148, Mar 173.
+Create a line chart titled "Monthly Active Users in Q1 2026" from this data:
+January 1.20 million, February 1.48 million, March 1.73 million.
+Use month on the horizontal axis and monthly active users on the vertical axis.
 ```
 
-Or invoke the skill explicitly:
+### Organization chart
 
 ```text
-/chart-visualization Compare product revenue: Alpha 42, Beta 31, Gamma 27.
+Create a vertical organization chart titled "Stellar Technology Organization".
+Alex Chen is the CEO, with Product led by Riley Lee, Engineering led by Jordan Zhou,
+and Commercial led by Morgan Lin.
+Product contains Product Design led by Avery Wang and User Growth led by Taylor Chen.
+Engineering contains Platform Engineering led by Cameron Zhao and Data Intelligence led by Sydney Sun.
+Commercial contains Enterprise Sales led by Parker He and Customer Success led by Quinn Zheng.
+Keep the supplied names and roles, and do not invent missing information.
 ```
 
-The model loads the skill, calls `antv_chart`, and returns a Markdown image. The tool currently supports:
+### Invoke the skill explicitly
+
+To explicitly request the chart capability, enter:
+
+```text
+/chart-visualization
+Create a pie chart for product revenue share: Alpha 42, Beta 31, Gamma 27.
+```
+
+### More examples
+
+```text
+Create a dual-axis chart for monthly visits and conversion rate:
+January 12,000 visits and 3.2%; February 15,600 and 3.8%; March 18,100 and 4.1%.
+```
+
+```text
+Create a Sankey chart for this user journey:
+Home to Product 860, Product to Cart 420, Cart to Payment 260, Payment to Complete 210.
+```
+
+## Supported charts
 
 `area`, `bar`, `boxplot`, `column`, `dual-axes`, `fishbone-diagram`, `flow-diagram`, `funnel`, `histogram`, `liquid`, `line`, `mind-map`, `network-graph`, `organization-chart`, `pie`, `radar`, `sankey`, `scatter`, `spreadsheet`, `treemap`, `venn`, `violin`, `waterfall`, and `word-cloud`.
 
-## Configuration
+## Use a private chart service
 
-The default endpoint is `https://antv-studio.alipay.com/api/gpt-vis`. Override the bundle row in `$DSH_HOME/profiles/web/cordis.patch.yml` when using a private compatible gateway or different limits:
+The plugin uses the public AntV GPT-Vis endpoint by default. To process internal data with a compatible private service, configure it in `$DSH_HOME/profiles/web/cordis.patch.yml`:
 
 ```yaml
 - id: dsh-chart
   config:
     endpoint: https://charts.example.com/api/gpt-vis
-    requestTimeoutMs: 30000
-    maxResponseBytes: 65536
 ```
-
-| Field              |                      Default | Description                                                                                                                       |
-| ------------------ | ---------------------------: | --------------------------------------------------------------------------------------------------------------------------------- |
-| `endpoint`         | AntV public GPT-Vis endpoint | HTTP(S) endpoint receiving the chart specification. HTTP is allowed for local development. Embedded URL credentials are rejected. |
-| `requestTimeoutMs` |                      `30000` | Positive request timeout, up to `300000`. The fetch operation cooperates with Harness cancellation.                               |
-| `maxResponseBytes` |                      `65536` | Maximum response body size from `1024` through `10485760`.                                                                        |
-
-The plugin always overwrites the outbound `source` field with `chart-visualization-skills`, as required by the upstream API contract.
 
 ## Data and privacy
 
-The tool sends the full `spec` object to the configured endpoint. Do not include passwords, access tokens, private keys, government identifiers, full personal contact details, or unnecessary sensitive business records. Aggregate or anonymize data, or configure a private compatible endpoint.
+Chart data from your prompt is sent to the currently configured chart service. Do not submit passwords, access tokens, private keys, government identifiers, full personal contact details, or unnecessary sensitive business records.
 
-No API credential is read or transmitted by this plugin. Generated image URLs may be hosted by the configured service and follow that service's retention and access policy.
+For sensitive data, aggregate or anonymize it first, or use your own compatible service. Image retention and access are governed by the selected service.
+
+## Remove
+
+```sh
+npx @deepseek-ai/dsh plugin --profile web remove dsh-plugin-chart
+```
 
 ## Development
 
@@ -115,31 +107,6 @@ pnpm install
 pnpm check
 ```
 
-Useful commands:
-
-| Command              | Purpose                                                               |
-| -------------------- | --------------------------------------------------------------------- |
-| `pnpm test`          | Run unit and registry integration tests.                              |
-| `pnpm test:coverage` | Run tests with coverage thresholds.                                   |
-| `pnpm typecheck`     | Type-check source and tests in strict mode.                           |
-| `pnpm build`         | Emit ESM JavaScript and declarations.                                 |
-| `pnpm format`        | Format project files with Prettier.                                   |
-| `pnpm check`         | Run formatting, type checks, coverage, build, and package validation. |
-
-The integration test mounts the real `SkillRegistry`, `SystemPrompt`, and `ToolRuntime` services, loads the embedded skill, then dispatches `antv_chart` against a mocked HTTP endpoint.
-
-## Upstream synchronization
-
-The embedded skill content in `src/skill.ts` is adapted from AntV's MIT-licensed `skills/chart-visualization/SKILL.md`. The pinned source commit is recorded in the source and in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
-
-## Release
-
-1. Update the version in `package.json`.
-2. Run `pnpm check` and `npm pack --dry-run`.
-3. Publish the generated package when the repository and npm package are configured.
-
-Before publishing, add your repository URL and issue tracker to `package.json`.
-
 ## License
 
-[MIT](LICENSE). Third-party attribution is in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+[MIT](LICENSE). Embedded content is adapted from AntV's [`chart-visualization`](https://github.com/antvis/chart-visualization-skills/tree/master/skills/chart-visualization) skill. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for attribution.

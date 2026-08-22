@@ -78,20 +78,39 @@ describe('requestAntvChart', () => {
   })
 
   it('enforces the configured response limit while streaming', async () => {
-    const fetchMock = vi.fn(async () => new Response('x'.repeat(2_000)))
+    const cancel = vi.fn()
+    const fetchMock = vi.fn(
+      async () =>
+        new Response(
+          new ReadableStream({
+            start(controller) {
+              controller.enqueue(new Uint8Array(2_000))
+            },
+            cancel,
+          }),
+        ),
+    )
     const config = resolveConfig({ maxResponseBytes: 1_024 })
 
     await expect(requestAntvChart(SPEC, config, { fetch: fetchMock })).rejects.toThrow(
       'response exceeds 1024 bytes',
     )
+    expect(cancel).toHaveBeenCalledWith('response size limit exceeded')
   })
 
-  it('distinguishes cancellation from transport failure', async () => {
+  it('reports cancellation while reading the response body', async () => {
     const controller = new AbortController()
-    controller.abort()
-    const fetchMock = vi.fn(async () => {
-      throw new DOMException('aborted', 'AbortError')
-    })
+    const fetchMock = vi.fn(
+      async () =>
+        new Response(
+          new ReadableStream({
+            pull(stream) {
+              controller.abort()
+              stream.error(new DOMException('aborted', 'AbortError'))
+            },
+          }),
+        ),
+    )
 
     await expect(
       requestAntvChart(SPEC, resolveConfig(), {
@@ -103,15 +122,18 @@ describe('requestAntvChart', () => {
 
   it('reports its own request timeout', async () => {
     const fetchMock = vi.fn(
-      async (_input: string | URL | Request, init?: RequestInit): Promise<Response> => {
-        await new Promise((resolve, reject) => {
-          init?.signal?.addEventListener('abort', () =>
-            reject(new DOMException('aborted', 'AbortError')),
-          )
-          setTimeout(resolve, 100)
-        })
-        return new Response('{}')
-      },
+      async (_input: string | URL | Request, init?: RequestInit) =>
+        new Response(
+          new ReadableStream({
+            start(controller) {
+              init?.signal?.addEventListener(
+                'abort',
+                () => controller.error(new DOMException('aborted', 'AbortError')),
+                { once: true },
+              )
+            },
+          }),
+        ),
     )
 
     await expect(

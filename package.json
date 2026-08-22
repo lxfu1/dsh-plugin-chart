@@ -49,9 +49,16 @@
     "skill"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lxfu1/dsh-plugin-chart.git"
+  },
+  "homepage": "https://github.com/lxfu1/dsh-plugin-chart#readme",
+  "bugs": {
+    "url": "https://github.com/lxfu1/dsh-plugin-chart/issues"
+  },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "dsh": {
     "bundle": {

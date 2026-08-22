@@ -38,7 +38,7 @@ export function createAntvChartTool(config: ResolvedConfig) {
       render: (_args, value) => [
         {
           type: 'text',
-          text: `![AntV ${value.type} chart](${value.url})`,
+          text: `![AntV ${value.type} chart](<${value.url}>)`,
         },
       ],
     },
