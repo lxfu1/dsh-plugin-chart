@@ -1,0 +1,5 @@
+# Installable DeepSeek Harness bundle patch.
+# The base profile already owns the `skills` and `tools` services injected here.
+- insert:
+    - id: dsh-chart
+      name: dsh-plugin-chart
