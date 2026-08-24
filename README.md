@@ -37,7 +37,7 @@ A coffee shop's beverage sales breakdown is: coffee 60%, tea 25%, and juice 15%.
 Please visualize this beverage sales data using a pie chart and add corresponding text labels.
 ```
 
-<img width="766" height="627" alt="image" src="https://github.com/user-attachments/assets/3bb6328a-dbd1-4116-8f1a-fae0cf5f59ca" />
+<img width="766" height="627" alt="Pie chart showing coffee, tea, and juice sales shares" src="https://github.com/user-attachments/assets/3bb6328a-dbd1-4116-8f1a-fae0cf5f59ca" />
 
 ### Organization chart
 
@@ -49,7 +49,7 @@ Zhang Chen is the CEO, responsible for the company's overall strategy. The CEO o
 3. Business Center, headed by Lin Lan; subordinate to He Feng (Enterprise Sales) and Zheng Xin (Customer Success).
 ```
 
-<img width="1316" height="273" alt="image" src="https://github.com/user-attachments/assets/c7d116bb-5470-4fb5-b48d-5c1fad042826" />
+<img width="1316" height="273" alt="Vertical organization chart for Xinghe Technology" src="https://github.com/user-attachments/assets/c7d116bb-5470-4fb5-b48d-5c1fad042826" />
 
 ### Invoke the skill explicitly
 
@@ -66,7 +66,7 @@ Seasonal Limited-Time Drinks: January 30, February 34, March 40, April 52, May 7
 Please use a multi-series line chart to display the annual sales trend of the four beverage categories. Set the chart title to "Monthly Sales Trend of Various Beverage Categories in 2025," with the horizontal axis representing months and the vertical axis representing sales volume (thousands of cups). Please use easily distinguishable colors for different beverages, display legends and data points, and retain the actual values for each month.
 ```
 
-<img width="761" height="408" alt="image" src="https://github.com/user-attachments/assets/bc143a6e-fcda-499f-b176-6964dc38e3a0" />
+<img width="761" height="408" alt="Multi-series line chart of monthly beverage sales in 2025" src="https://github.com/user-attachments/assets/bc143a6e-fcda-499f-b176-6964dc38e3a0" />
 
 ## Supported charts
 

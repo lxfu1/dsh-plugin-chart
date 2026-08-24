@@ -36,7 +36,7 @@ npx @deepseek-ai/dsh web
 一家咖啡店的饮品销售比例为：咖啡 60%，茶 25%，果汁 15%。请用环图可视化这些饮品销售数据，并添加对应的文本标签。
 ```
 
-<img width="768" height="657" alt="image" src="https://github.com/user-attachments/assets/6f83ef28-07b7-403e-afa1-78bdf735628a" />
+<img width="768" height="657" alt="咖啡、茶和果汁销售占比环图" src="https://github.com/user-attachments/assets/6f83ef28-07b7-403e-afa1-78bdf735628a" />
 
 ### 组织架构图
 
@@ -50,7 +50,7 @@ npx @deepseek-ai/dsh web
 请保留每个人的姓名和职责，不要补充不存在的部门或人员。
 ```
 
-<img width="1237" height="261" alt="image" src="https://github.com/user-attachments/assets/beb54a49-4a09-4ec8-a4d2-fbbf5c675d9b" />
+<img width="1237" height="261" alt="星河科技纵向组织架构图" src="https://github.com/user-attachments/assets/beb54a49-4a09-4ec8-a4d2-fbbf5c675d9b" />
 
 ### 显式调用 Skill
 
@@ -66,7 +66,7 @@ npx @deepseek-ai/dsh web
 请使用多系列折线图展示四类饮品全年的销量趋势。图表标题设为“2025 年各类饮品月度销量趋势”，横轴为月份，纵轴为销量（千杯）。请为不同饮品使用容易区分的颜色，显示图例和数据点，并保留各月份的真实数值。
 ```
 
-<img width="1502" height="1084" alt="image" src="https://github.com/user-attachments/assets/e7bd0fdb-c7df-4f43-a081-d1b0cae00dc7" />
+<img width="1502" height="1084" alt="2025 年各类饮品月度销量趋势折线图" src="https://github.com/user-attachments/assets/e7bd0fdb-c7df-4f43-a081-d1b0cae00dc7" />
 
 ## 支持的图表
 
