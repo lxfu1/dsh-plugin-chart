@@ -36,22 +36,21 @@ npx @deepseek-ai/dsh web
 ### Line chart
 
 ```text
-Create a line chart titled "Monthly Active Users in Q1 2026" from this data:
-January 1.20 million, February 1.48 million, March 1.73 million.
-Use month on the horizontal axis and monthly active users on the vertical axis.
+A coffee shop's beverage sales breakdown is: coffee 60%, tea 25%, and juice 15%.
+Please visualize this beverage sales data using a pie chart and add corresponding text labels.
 ```
+<img width="766" height="627" alt="image" src="https://github.com/user-attachments/assets/3bb6328a-dbd1-4116-8f1a-fae0cf5f59ca" />
 
 ### Organization chart
 
 ```text
-Create a vertical organization chart titled "Stellar Technology Organization".
-Alex Chen is the CEO, with Product led by Riley Lee, Engineering led by Jordan Zhou,
-and Commercial led by Morgan Lin.
-Product contains Product Design led by Avery Wang and User Growth led by Taylor Chen.
-Engineering contains Platform Engineering led by Cameron Zhao and Data Intelligence led by Sydney Sun.
-Commercial contains Enterprise Sales led by Parker He and Customer Success led by Quinn Zheng.
-Keep the supplied names and roles, and do not invent missing information.
+Please use AntV to generate an organizational chart titled "Xinghe Technology Organizational Structure," using a vertical layout.
+Zhang Chen is the CEO, responsible for the company's overall strategy. The CEO oversees three centers:
+1. Product Center, headed by Li Ran; subordinate to Wang Min (Product Design) and Chen Tao (User Growth).
+2. Technology Center, headed by Zhou Yu; subordinate to Zhao Lei (Platform R&D) and Sun Yue (Data Intelligence).
+3. Business Center, headed by Lin Lan; subordinate to He Feng (Enterprise Sales) and Zheng Xin (Customer Success).
 ```
+<img width="1316" height="273" alt="image" src="https://github.com/user-attachments/assets/c7d116bb-5470-4fb5-b48d-5c1fad042826" />
 
 ### Invoke the skill explicitly
 
@@ -59,34 +58,21 @@ To explicitly request the chart capability, enter:
 
 ```text
 /chart-visualization
-Create a pie chart for product revenue share: Alpha 42, Beta 31, Gamma 27.
-```
+The following are the monthly sales figures for various beverages at a chain coffee shop in 2025, in thousands of cups:
+Coffee: January 128, February 135, March 142, April 150, May 163, June 178, July 192, August 188, September 176, October 169, November 158, December 151.
+Tea: January 82, February 86, March 91, April 98, May 110, June 126, July 143, August 151, September 147, October 132, November 108, December 94.
+Fruit Juice: January 45, February 48, March 55, April 68, May 92, June 126, July 158, August 171, September 149, October 103, November 66, December 50.
+Seasonal Limited-Time Drinks: January 30, February 34, March 40, April 52, May 75, June 105, July 138, August 146, September 119, October 80, November 48, December 35.
 
-### More examples
-
-```text
-Create a dual-axis chart for monthly visits and conversion rate:
-January 12,000 visits and 3.2%; February 15,600 and 3.8%; March 18,100 and 4.1%.
+Please use a multi-series line chart to display the annual sales trend of the four beverage categories. Set the chart title to "Monthly Sales Trend of Various Beverage Categories in 2025," with the horizontal axis representing months and the vertical axis representing sales volume (thousands of cups). Please use easily distinguishable colors for different beverages, display legends and data points, and retain the actual values ​​for each month.
 ```
+<img width="761" height="408" alt="image" src="https://github.com/user-attachments/assets/bc143a6e-fcda-499f-b176-6964dc38e3a0" />
 
-```text
-Create a Sankey chart for this user journey:
-Home to Product 860, Product to Cart 420, Cart to Payment 260, Payment to Complete 210.
-```
 
 ## Supported charts
 
 `area`, `bar`, `boxplot`, `column`, `dual-axes`, `fishbone-diagram`, `flow-diagram`, `funnel`, `histogram`, `liquid`, `line`, `mind-map`, `network-graph`, `organization-chart`, `pie`, `radar`, `sankey`, `scatter`, `spreadsheet`, `treemap`, `venn`, `violin`, `waterfall`, and `word-cloud`.
 
-## Use a private chart service
-
-The plugin uses the public AntV GPT-Vis endpoint by default. To process internal data with a compatible private service, configure it in `$DSH_HOME/profiles/web/cordis.patch.yml`:
-
-```yaml
-- id: dsh-chart
-  config:
-    endpoint: https://charts.example.com/api/gpt-vis
-```
 
 ## Data and privacy
 
