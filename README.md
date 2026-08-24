@@ -2,12 +2,10 @@
 
 English | [简体中文](README.zh-CN.md)
 
-An unofficial community plugin for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) that creates AntV chart images directly from natural-language requests.
+An plugin for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) that creates AntV chart images directly from natural-language requests.
 
 Provide the data and what you want to communicate. The plugin selects a suitable chart and displays the result in the conversation. Supported formats include line, bar, pie, radar, Sankey, organization, network, and flow charts.
 
-> [!IMPORTANT]
-> This project is not affiliated with or endorsed by DeepSeek or AntV. DeepSeek Harness is currently a developer preview and may introduce breaking changes.
 
 ## Requirements
 
@@ -33,7 +31,7 @@ npx @deepseek-ai/dsh web
 
 ## Examples
 
-### Line chart
+### Pie chart
 
 ```text
 A coffee shop's beverage sales breakdown is: coffee 60%, tea 25%, and juice 15%.
