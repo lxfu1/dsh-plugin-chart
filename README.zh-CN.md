@@ -6,7 +6,6 @@
 
 你只需要提供数据和想表达的内容，插件会选择合适的图表类型并在对话中展示结果。目前支持折线图、柱状图、饼图、雷达图、桑基图、组织架构图、关系图、流程图等多种图表。
 
-
 ## 环境要求
 
 - Node.js `^22.19.0` 或 `>=24.0.0`
@@ -36,8 +35,8 @@ npx @deepseek-ai/dsh web
 ```text
 一家咖啡店的饮品销售比例为：咖啡 60%，茶 25%，果汁 15%。请用环图可视化这些饮品销售数据，并添加对应的文本标签。
 ```
-<img width="768" height="657" alt="image" src="https://github.com/user-attachments/assets/6f83ef28-07b7-403e-afa1-78bdf735628a" />
 
+<img width="768" height="657" alt="image" src="https://github.com/user-attachments/assets/6f83ef28-07b7-403e-afa1-78bdf735628a" />
 
 ### 组织架构图
 
@@ -50,8 +49,8 @@ npx @deepseek-ai/dsh web
 
 请保留每个人的姓名和职责，不要补充不存在的部门或人员。
 ```
-<img width="1237" height="261" alt="image" src="https://github.com/user-attachments/assets/beb54a49-4a09-4ec8-a4d2-fbbf5c675d9b" />
 
+<img width="1237" height="261" alt="image" src="https://github.com/user-attachments/assets/beb54a49-4a09-4ec8-a4d2-fbbf5c675d9b" />
 
 ### 显式调用 Skill
 
@@ -66,13 +65,12 @@ npx @deepseek-ai/dsh web
 季节限定饮品：1 月 30，2 月 34，3 月 40，4 月 52，5 月 75，6 月 105，7 月 138，8 月 146，9 月 119，10 月 80，11 月 48，12 月 35。
 请使用多系列折线图展示四类饮品全年的销量趋势。图表标题设为“2025 年各类饮品月度销量趋势”，横轴为月份，纵轴为销量（千杯）。请为不同饮品使用容易区分的颜色，显示图例和数据点，并保留各月份的真实数值。
 ```
-<img width="1502" height="1084" alt="image" src="https://github.com/user-attachments/assets/e7bd0fdb-c7df-4f43-a081-d1b0cae00dc7" />
 
+<img width="1502" height="1084" alt="image" src="https://github.com/user-attachments/assets/e7bd0fdb-c7df-4f43-a081-d1b0cae00dc7" />
 
 ## 支持的图表
 
 `area`、`bar`、`boxplot`、`column`、`dual-axes`、`fishbone-diagram`、`flow-diagram`、`funnel`、`histogram`、`liquid`、`line`、`mind-map`、`network-graph`、`organization-chart`、`pie`、`radar`、`sankey`、`scatter`、`spreadsheet`、`treemap`、`venn`、`violin`、`waterfall` 和 `word-cloud`。
-
 
 ## 数据与隐私
 

@@ -6,7 +6,6 @@ An plugin for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness
 
 Provide the data and what you want to communicate. The plugin selects a suitable chart and displays the result in the conversation. Supported formats include line, bar, pie, radar, Sankey, organization, network, and flow charts.
 
-
 ## Requirements
 
 - Node.js `^22.19.0` or `>=24.0.0`
@@ -37,6 +36,7 @@ npx @deepseek-ai/dsh web
 A coffee shop's beverage sales breakdown is: coffee 60%, tea 25%, and juice 15%.
 Please visualize this beverage sales data using a pie chart and add corresponding text labels.
 ```
+
 <img width="766" height="627" alt="image" src="https://github.com/user-attachments/assets/3bb6328a-dbd1-4116-8f1a-fae0cf5f59ca" />
 
 ### Organization chart
@@ -48,6 +48,7 @@ Zhang Chen is the CEO, responsible for the company's overall strategy. The CEO o
 2. Technology Center, headed by Zhou Yu; subordinate to Zhao Lei (Platform R&D) and Sun Yue (Data Intelligence).
 3. Business Center, headed by Lin Lan; subordinate to He Feng (Enterprise Sales) and Zheng Xin (Customer Success).
 ```
+
 <img width="1316" height="273" alt="image" src="https://github.com/user-attachments/assets/c7d116bb-5470-4fb5-b48d-5c1fad042826" />
 
 ### Invoke the skill explicitly
@@ -64,13 +65,12 @@ Seasonal Limited-Time Drinks: January 30, February 34, March 40, April 52, May 7
 
 Please use a multi-series line chart to display the annual sales trend of the four beverage categories. Set the chart title to "Monthly Sales Trend of Various Beverage Categories in 2025," with the horizontal axis representing months and the vertical axis representing sales volume (thousands of cups). Please use easily distinguishable colors for different beverages, display legends and data points, and retain the actual values ​​for each month.
 ```
-<img width="761" height="408" alt="image" src="https://github.com/user-attachments/assets/bc143a6e-fcda-499f-b176-6964dc38e3a0" />
 
+<img width="761" height="408" alt="image" src="https://github.com/user-attachments/assets/bc143a6e-fcda-499f-b176-6964dc38e3a0" />
 
 ## Supported charts
 
 `area`, `bar`, `boxplot`, `column`, `dual-axes`, `fishbone-diagram`, `flow-diagram`, `funnel`, `histogram`, `liquid`, `line`, `mind-map`, `network-graph`, `organization-chart`, `pie`, `radar`, `sankey`, `scatter`, `spreadsheet`, `treemap`, `venn`, `violin`, `waterfall`, and `word-cloud`.
-
 
 ## Data and privacy
 
