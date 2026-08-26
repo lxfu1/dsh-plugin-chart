@@ -68,7 +68,6 @@ Please use a multi-series line chart to display the annual sales trend of the fo
 
 <img width="1512" height="1162" alt="image" src="https://github.com/user-attachments/assets/3ca31432-001e-4865-aabc-873451c98233" />
 
-
 ## Supported charts
 
 `area`, `bar`, `boxplot`, `column`, `dual-axes`, `fishbone-diagram`, `flow-diagram`, `funnel`, `histogram`, `liquid`, `line`, `mind-map`, `network-graph`, `organization-chart`, `pie`, `radar`, `sankey`, `scatter`, `spreadsheet`, `treemap`, `venn`, `violin`, `waterfall`, and `word-cloud`.
