@@ -66,7 +66,8 @@ Seasonal Limited-Time Drinks: January 30, February 34, March 40, April 52, May 7
 Please use a multi-series line chart to display the annual sales trend of the four beverage categories. Set the chart title to "Monthly Sales Trend of Various Beverage Categories in 2025," with the horizontal axis representing months and the vertical axis representing sales volume (thousands of cups). Please use easily distinguishable colors for different beverages, display legends and data points, and retain the actual values for each month.
 ```
 
-<img width="761" height="408" alt="Multi-series line chart of monthly beverage sales in 2025" src="https://github.com/user-attachments/assets/bc143a6e-fcda-499f-b176-6964dc38e3a0" />
+<img width="1512" height="1162" alt="image" src="https://github.com/user-attachments/assets/3ca31432-001e-4865-aabc-873451c98233" />
+
 
 ## Supported charts
 
